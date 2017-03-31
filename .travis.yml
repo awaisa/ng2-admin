@@ -8,8 +8,6 @@ node_js:
 
 cache:
   directories:
-    - node_modules
-    - $HOME/.npm
     - $HOME/.cache/yarn
 
 addons:
@@ -20,7 +18,10 @@ addons:
     packages:
       - g++-4.8
       - google-chrome-stable
-      - google-chrome-beta
+  browserstack:
+    username: "alexander1040"
+    access_key: "Jauouq9xfuiy9FZq3uA4"
+    forcelocal: true
 
 before_install:
   - export CHROME_BIN=chromium-browser
@@ -30,16 +31,16 @@ before_install:
   - export PATH=$HOME/.yarn/bin:$PATH
 
 before_script:
-  - npm i -g @angular/cli
 
 install:
   - yarn
 
 script:
-  - yarn run lint:ci
-  - yarn run test
-  - yarn run e2e
-  - yarn run build:ci
+  - npm run lint:ci
+  - npm run test
+  - npm run build:ci
+  - npm run start
+  - npm run bs:local
 
 notifications:
   slack: akveo:q559HckfZMSyZRb803aiLcjH
